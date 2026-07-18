@@ -1,0 +1,16 @@
+[project]
+name = "auburn-worker"
+version = "0.1.0"
+description = "Auburn Ridge leasing platform — Celery worker (analytics, news, alerts)"
+requires-python = ">=3.10"
+dependencies = [
+    "celery>=5.4",
+    "redis>=5.0",
+]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["worker*"]

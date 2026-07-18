@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+body {
+  @apply bg-cream text-charcoal font-body antialiased;
+}
+
+/* WCAG AA: visible focus everywhere */
+:focus-visible {
+  outline: 3px solid theme("colors.brass");
+  outline-offset: 2px;
+}
