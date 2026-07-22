@@ -1,5 +1,8 @@
-// Portal calls go to the API origin with cookies (httpOnly session).
-export const API = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";
+// All browser calls are same-origin relative URLs, proxied to FastAPI by the
+// Next.js rewrite — one public origin, so tunnels/deploys just work and the
+// session cookie stays first-party. Set NEXT_PUBLIC_API_URL only to bypass
+// the proxy in unusual setups.
+export const API = process.env.NEXT_PUBLIC_API_URL ?? "";
 
 export async function portalFetch(path: string, init?: RequestInit): Promise<Response> {
   return fetch(`${API}${path}`, { credentials: "include", ...init });

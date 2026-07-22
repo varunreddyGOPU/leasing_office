@@ -4,10 +4,9 @@ import { useEffect, useRef, useState } from "react";
 
 import { cn } from "@/lib/utils";
 
-// Chat streams directly from the FastAPI origin (CORS-allowed) rather than
-// through the Next rewrite, so SSE chunks arrive unbuffered. The Ollama key
-// never reaches this code — FastAPI holds it server-side.
-const API = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";
+// Chat calls are same-origin and proxied to FastAPI by the Next rewrite.
+// The Ollama key never reaches this code — FastAPI holds it server-side.
+const API = process.env.NEXT_PUBLIC_API_URL ?? "";
 
 interface Message {
   role: "user" | "assistant";
