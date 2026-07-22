@@ -96,6 +96,75 @@ class LeadOut(BaseModel):
     message: str
 
 
+class LoginRequest(BaseModel):
+    email: EmailStr
+    password: str = Field(..., min_length=1, max_length=200)
+
+
+class ResidentOut(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+
+    id: int
+    name: str
+    email: str
+    phone: str | None = None
+
+
+class LeaseUnitInfo(BaseModel):
+    unit_number: str
+    floor_plan_name: str
+    bedrooms: int
+    bathrooms: float
+    sqft: int
+
+
+class LeaseOut(BaseModel):
+    id: int
+    start_date: date
+    end_date: date
+    days_to_end: int
+    monthly_rent: float
+    auto_renew_opt_in: bool
+    renewal_status: str
+    renewal_offer_rent: float | None = None
+    unit: LeaseUnitInfo
+
+
+class MeLeaseResponse(BaseModel):
+    resident: ResidentOut
+    lease: LeaseOut | None = None
+    upcoming_lease: LeaseOut | None = None
+
+
+class RenewalActionIn(BaseModel):
+    action: Literal["accept", "decline"]
+
+
+class MaintenanceCreateResult(BaseModel):
+    id: int
+    status: str
+
+
+class MaintenanceTicketOut(BaseModel):
+    id: int
+    category: str
+    description: str
+    status: str
+    created_at: datetime
+    resolved_at: datetime | None = None
+    photo_count: int = 0
+
+
+class AdminMaintenanceTicketOut(MaintenanceTicketOut):
+    unit_number: str
+    resident_name: str
+    resident_id: int
+
+
+class MaintenanceStatusIn(BaseModel):
+    status: Literal["new", "scheduled", "in_progress", "resolved"]
+
+
 class NewsItemOut(BaseModel):
     model_config = ConfigDict(from_attributes=True)
 

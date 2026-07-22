@@ -18,8 +18,12 @@ from sqlalchemy import select
 
 from app import models
 from app.db import SessionLocal
+from app.security import hash_password
 
 random.seed(48326)
+
+# Sample-resident portal password (dev/demo only — replace flow in production).
+DEMO_RESIDENT_PASSWORD = "auburn-demo"
 
 ANNUAL_TREND = 0.03
 SEASONAL_AMPLITUDE = 0.03  # +/-3%, peaking in July
@@ -186,6 +190,7 @@ def seed() -> None:
                 name=name,
                 email=f"resident{idx + 1}@example.com",
                 phone=f"248-555-{1000 + idx:04d}",
+                password_hash=hash_password(DEMO_RESIDENT_PASSWORD),
             )
             db.add(resident)
             db.flush()

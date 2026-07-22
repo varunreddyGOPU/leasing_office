@@ -16,6 +16,7 @@ const nav = [
   { href: "/estimate", label: "Instant Estimate" },
   { href: "/news", label: "Local News" },
   { href: "/contact", label: "Contact" },
+  { href: "/portal", label: "Resident Portal" },
 ];
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

@@ -13,6 +13,10 @@ class Settings(BaseSettings):
     sentry_dsn: str = ""
     environment: str = "development"
 
+    secret_key: str = "dev-secret-change-me"
+    admin_api_key: str = "dev-admin"
+    upload_dir: str = "./uploads"
+
     model_config = SettingsConfigDict(env_file=".env", extra="ignore")
 
 

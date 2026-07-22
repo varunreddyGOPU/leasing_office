@@ -4,7 +4,7 @@ from sqlalchemy import text
 
 from app.config import settings
 from app.db import engine
-from app.routers import chat, estimates, floor_plans, leads, news
+from app.routers import admin, auth, chat, estimates, floor_plans, leads, news, portal
 
 app = FastAPI(title="Auburn Ridge Leasing API", version="0.1.0")
 
@@ -21,6 +21,9 @@ app.include_router(estimates.router)
 app.include_router(leads.router)
 app.include_router(news.router)
 app.include_router(chat.router)
+app.include_router(auth.router)
+app.include_router(portal.router)
+app.include_router(admin.router)
 
 
 @app.get("/healthz")

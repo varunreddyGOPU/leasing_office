@@ -36,9 +36,14 @@ services:
       OLLAMA_MODEL: ${OLLAMA_MODEL:-llama3.1:70b}
       NEWS_API_KEY: ${NEWS_API_KEY:-}
       SENTRY_DSN: ${SENTRY_DSN:-}
+      SECRET_KEY: ${SECRET_KEY:-dev-secret-change-me}
+      ADMIN_API_KEY: ${ADMIN_API_KEY:-dev-admin}
+      UPLOAD_DIR: /app/uploads
     command: sh -c "alembic upgrade head && python -m app.seed && uvicorn app.main:app --host 0.0.0.0 --port 8000"
     ports:
       - "8000:8000"
+    volumes:
+      - api_uploads:/app/uploads
     depends_on:
       postgres:
         condition: service_healthy
@@ -79,3 +84,4 @@ services:
 
 volumes:
   pgdata:
+  api_uploads:

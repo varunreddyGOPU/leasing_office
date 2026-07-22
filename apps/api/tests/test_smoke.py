@@ -37,5 +37,8 @@ def test_availability():
     r = client.get("/api/availability")
     assert r.status_code == 200
     units = r.json()
-    assert len(units) == 3  # one vacant unit per floor plan
+    # Seed leaves one vacant unit per floor plan; other tests (renewal
+    # decline) may legitimately add more.
+    assert len(units) >= 3
     assert all(u["status"] == "available" for u in units)
+    assert {u["bedrooms"] for u in units} == {1, 2, 3}
